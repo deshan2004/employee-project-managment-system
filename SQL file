@@ -1,0 +1,229 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 02, 2026 at 07:25 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `employee_project_management`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_logs`
+--
+
+CREATE TABLE `daily_logs` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `work_done` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `daily_logs`
+--
+
+INSERT INTO `daily_logs` (`id`, `employee_id`, `date`, `work_done`) VALUES
+(1, 3, '2026-02-28', 'dfdff');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `employee_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `designation` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `user_id`, `first_name`, `last_name`, `designation`) VALUES
+(1, 2, 'Deshan', 'Siriwardhana', 'dggg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `project_id` int(11) NOT NULL,
+  `project_name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`project_id`, `project_name`, `description`, `start_date`, `end_date`) VALUES
+(1, 'hkk', 'fsdsddfghjkjhdfd', '2026-02-28', '2026-04-01'),
+(2, 'ccxcx', 'dsd', '2026-03-13', '2026-04-09'),
+(3, 'veck', 'fjkddnknrienr', '2026-03-11', '2026-04-30'),
+(4, 'dss', 'xsnjdjnd', '2026-03-12', '2026-04-11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_assignments`
+--
+
+CREATE TABLE `project_assignments` (
+  `assignment_id` int(11) NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `project_assignments`
+--
+
+INSERT INTO `project_assignments` (`assignment_id`, `project_id`, `employee_id`, `role`) VALUES
+(1, 1, 1, 'developer'),
+(2, 2, 1, 'scrum');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','employee') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`) VALUES
+(1, 'admin@gmail.com', '$2y$10$gHfBJBajZ4H8AUrsMit5DOS8MLZy4t1eLp5gwcVLBXpIsBVJdp5Mi', 'admin'),
+(2, 'deshandhakshitha16@gmail.com', '$2y$10$V/PKhax265l4/YccT/ghIOKi446GJE6KX4NF3UbEB/xMB5T9yW7vO', 'employee'),
+(3, 'deshansirwardana20@gmail.com', '$2y$10$WJQzYYTFrTE.9oDVipqdDuYrTYv1ZfNP9Z.9258LEHntqzB.lY1gq', 'employee'),
+(5, 'employee@epms.com', '$2y$10$MNRcL/Gvy1XzwtLC8HSfYe5Vg9.3z91WmiRYIDnh7GScSs5BeAyJ.', 'employee'),
+(10, 'admin@test.com', '$2y$10$8eRBv.KMphIXjAvEQN5RruAxlXpitnHI9HV8PUtiaTfgJEX1dZBSO', 'employee'),
+(11, 'thushri23@gmail.com', '$2y$10$.sYiB3kmS1/3EI2ckrKL.uVxP1rOlZg5TPaDssOTjuLX91umPldTy', 'employee'),
+(14, 'sthmi23@gmail.com', '$2y$10$avjl3pNSBeH9pNFjf4Y14eBuqDoXPoXYy3AJD2VIF6vRMI8FmBLLe', 'employee'),
+(16, 'siri23@gmail.com', '$2y$10$yeazd1OND8GeCa7h2YSTBuS1CPhB1Hi7X./gb9Nhw/UEsgUbS4UQe', 'employee');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `daily_logs`
+--
+ALTER TABLE `daily_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`employee_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`project_id`);
+
+--
+-- Indexes for table `project_assignments`
+--
+ALTER TABLE `project_assignments`
+  ADD PRIMARY KEY (`assignment_id`),
+  ADD KEY `project_id` (`project_id`),
+  ADD KEY `employee_id` (`employee_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `daily_logs`
+--
+ALTER TABLE `daily_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `project_assignments`
+--
+ALTER TABLE `project_assignments`
+  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `project_assignments`
+--
+ALTER TABLE `project_assignments`
+  ADD CONSTRAINT `project_assignments_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_assignments_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
